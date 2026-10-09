@@ -12,39 +12,32 @@ const handleFormSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
 
   const formData = new FormData(e.target);
   const data = Object.fromEntries(formData.entries()) as {
-    name: string;
     email: string;
     password: string;
-    confirm: string;
   };
 
-  if (!data.name || !data.email || !data.password || !data.confirm) {
+  if (!data.email || !data.password) {
     toast.error("অনুগ্রহ পূর্বক পুরো ফর্মটি পূরণ করুন");
     return;
   }
 
-  if (data.password !== data.confirm) {
-    toast.error("আপনার পাসওয়ার্ড দুটি একই হতে হবে!");
-    return;
-  }
 
-  await authClient.signUp.email(
+  await authClient.signIn.email(
     {
       email: data.email,
-      name: data.name,
       password: data.password,
     },
     {
       onRequest: () => {
-        toast.info("একাউন্ট তৈরি হচ্ছে");
+        toast.info("সাইন ইন হচ্ছে");
       },
       onSuccess: () => {
-        toast.success("একাউন্ট সফলভাবে তৈরি হয়েছে");
+        toast.success("আপনি সফলভাবে সাইন ইন করেছেন!");
         navigation.navigate("/");
       },
       onError: (ctx) => {
-        if (ctx.error.code === "USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL") {
-          toast.error("একাউন্ট ইতিমধ্যে রয়েছে। অনুগ্রহ পূর্বক সাইন ইন করুন!");
+        if (ctx.error.code === "INVALID_EMAIL_OR_PASSWORD") {
+          toast.error("আপনার ইমেইল অথবা পাসওয়ার্ড ভুল");
         } else {
           toast.error(ctx.error.message);
         }
@@ -53,13 +46,13 @@ const handleFormSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
   );
 };
 
-const SignUpPage = () => {
+const SignInPage = () => {
   return (
     <div className="w-full my-10 flex flex-col items-center justify-center gap-7">
       <div className="text-center">
-        <h1 className="font-bold text-[20px]">অ্যাকাউন্ট তৈরি করুন</h1>
+        <h1 className="font-bold text-[20px]">সাইন ইন</h1>
         <p className="font-medium text-[14px] text-base-content">
-          বিনা খরচে সাইন আপ করে সব বিস্তারিত দাম দেখুন।
+          বিস্তারিত দাম, বাজার তুলনা ও প্রোফাইল দেখতে অ্যাকাউন্টে ঢুকুন।
         </p>
       </div>
       <div className="bg-white p-6 rounded-lg flex flex-col gap-4">
@@ -68,16 +61,6 @@ const SignUpPage = () => {
           className="bg-white rounded-lg flex flex-col gap-4 min-w-100"
           onSubmit={(e) => handleFormSubmit(e)}
         >
-          <div className="flex flex-col gap-2">
-            <p className="text-[14px] text-base-content">নাম</p>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              placeholder="যেমনঃ রহিম উদ্দিন"
-              className="w-full border border-solid border-base-300 text-base-content px-2 py-1 rounded-md"
-            />
-          </div>
           <div className="flex flex-col gap-2">
             <p>ইমেইল</p>
             <input
@@ -99,22 +82,11 @@ const SignUpPage = () => {
               className="w-full border border-solid border-base-300 text-base-content px-2 py-1 rounded-md"
             />
           </div>
-          <div className="flex flex-col gap-2">
-            <p>পাসওয়ার্ড নিশ্চিত করুন</p>
-            <input
-              type="password"
-              name="confirm"
-              id="confirm"
-              minLength={8}
-              placeholder="আবার লিখুন"
-              className="w-full border border-solid border-base-300 text-base-content px-2 py-1 rounded-md"
-            />
-          </div>
           <button
             type="submit"
             className="w-full text-center bg-primary text-white py-2 rounded-md shadow-btn cursor-pointer"
           >
-            একাউন্ট তৈরি করুন
+            সাইন ইন
           </button>
         </form>
         <div className="flex justify-between items-center gap-5">
@@ -131,10 +103,7 @@ const SignUpPage = () => {
           </p>
         </div>
         <p className="text-center text-[14px]">
-          অ্যাকাউন্ট আছে?{" "}
-          <Link href={"/sign-in"} className="text-primary">
-            সাইন ইন করুন
-          </Link>
+          অ্যাকাউন্ট নেই? <Link href={"/sign-up"} className="text-primary">সাইন আপ করুন</Link>
         </p>
       </div>
       <Link href={"/"}>← হোম পেজে ফিরে যান</Link>
@@ -142,4 +111,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default SignInPage;
