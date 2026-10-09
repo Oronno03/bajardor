@@ -9,7 +9,7 @@ const Navbar = () => {
         <div className="mx-auto container">
           <Navtop />
         </div>
-        <div className="w-full h-px bg-primary/20"></div>
+        <div className="w-full h-px bg-primary/10"></div>
         <div className="mx-auto container">
           <Suspense fallback={"Loading navlinks..."}>
             <Navlinks />
