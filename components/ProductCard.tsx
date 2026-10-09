@@ -1,4 +1,5 @@
 import { toBanglaNumber } from "@/lib/toBanglaNumber";
+import { getUnit } from "@/lib/utils";
 import { IProduct } from "@/type";
 import Link from "next/link";
 import React from "react";
@@ -10,7 +11,7 @@ const ProductCard = ({ product }: { product: IProduct }) => {
         <p className="bg-base-300 p-2 rounded-lg w-max">{product.image}</p>
         <div>
           <h1 className="font-bold text-[16px]">{product.nameBn}</h1>
-          <p className="text-[12px]">প্রতি কেজি</p>
+          <p className="text-[12px]">{getUnit(product.unit)}</p>
         </div>
       </div>
       <div className="flex justify-between items-end">

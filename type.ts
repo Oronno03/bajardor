@@ -23,7 +23,7 @@ export interface IProduct {
 }
 
 export interface Change {
-  dir: "up" | "down";
+  dir: "up" | "down" | "flat";
   pct: number;
 }
 
