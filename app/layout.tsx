@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 import { Hind_Siliguri } from "next/font/google";
 import "./globals.css";
-
+import Navbar from "@/components/Navbar/Navbar";
+import { Suspense } from "react";
+import Marquee from "@/components/Marquee";
+import { ToastContainer } from "react-toastify";
 
 const hindSiliguri = Hind_Siliguri({
   variable: "--font-hind-siliguri",
   subsets: ["bengali"],
-  weight: ["300", "400", "500", "600", "700"]
-})
+  weight: ["300", "400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,11 +19,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`${hindSiliguri.variable} h-full antialiase`}
-    >
-      <body className="min-h-full flex flex-col bg-base-300">{children}</body>
+    <html lang="en" className={`${hindSiliguri.variable} h-full antialiase`}>
+      <body className="min-h-full flex flex-col bg-base-300">
+        <ToastContainer
+          draggable={true}
+          position="bottom-right"
+        />
+        <Navbar />
+        <Suspense fallback={"Loading..."}>
+          <Marquee />
+        </Suspense>
+        {children}
+      </body>
     </html>
   );
 }

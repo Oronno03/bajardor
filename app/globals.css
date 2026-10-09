@@ -18,4 +18,6 @@
     --color-link-primary: #02642B;
 
     --color-success: #1A9951;
+
+    --shadow-btn: 0 4px 3px #05893E4D, 0 3px 2px #05893E4D, inset 0 0.5px 0 #FFF;
 }
