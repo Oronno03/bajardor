@@ -1,6 +1,9 @@
+import AllProducts from "@/components/AllProducts";
+import Fallers from "@/components/Fallers";
 import Hero from "@/components/Hero";
 import Marquee from "@/components/Marquee";
 import Navbar from "@/components/Navbar/Navbar";
+import Risers from "@/components/Risers";
 import { Suspense } from "react";
 
 export default function Home() {
@@ -12,6 +15,11 @@ export default function Home() {
         <Marquee />
       </Suspense>
       <Hero />
+      <Suspense fallback={"Loading..."}>
+        <Risers />
+        <Fallers />
+        <AllProducts />
+      </Suspense>
     </div>
   );
 }
