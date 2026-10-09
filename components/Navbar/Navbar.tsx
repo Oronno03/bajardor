@@ -4,7 +4,7 @@ import { Suspense } from "react";
 
 const Navbar = () => {
   return (
-    <nav className="">
+    <nav className="bg-white">
       <div>
         <div className="mx-auto container">
           <Navtop />

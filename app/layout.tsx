@@ -20,7 +20,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${hindSiliguri.variable} h-full antialiase`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col bg-base-300">{children}</body>
     </html>
   );
 }

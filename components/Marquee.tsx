@@ -14,7 +14,7 @@ const Marquee = async () => {
   const products = await fetchProducts();
 
   return (
-    <MarqueeText direction="right">
+    <MarqueeText direction="right" className="bg-white">
       <div className="py-2">
         {products.map((product) => (
           <Link href={`/product/${product.id}`} key={product.id} className="px-4">
