@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
-import { Hind_Siliguri } from "next/font/google";
+import { Hind_Siliguri, Geist } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import { Suspense } from "react";
 import Marquee from "@/components/Marquee";
 import { ToastContainer } from "react-toastify";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const hindSiliguri = Hind_Siliguri({
   variable: "--font-hind-siliguri",
@@ -19,7 +22,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${hindSiliguri.variable} h-full antialiase`}>
+    <html lang="en" className={cn("h-full", "antialiase", hindSiliguri.variable, "font-sans", geist.variable)}>
       <body className="min-h-full flex flex-col bg-base-300">
         <ToastContainer
           draggable={true}

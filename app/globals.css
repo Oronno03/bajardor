@@ -1,4 +1,8 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
 
 @theme {
     --color-primary: #047F39;
@@ -10,7 +14,7 @@
 
     --color-neutral-bg: #DADEDA;
     --color-neutral-hover: #CCD0CC;
-    
+
     --color-error-bg: #BD3133;
     --color-error-border: #B02D2F;
     --color-error: #D03739;
