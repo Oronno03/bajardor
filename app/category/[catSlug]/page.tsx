@@ -1,5 +1,6 @@
 import CategoryPageComponent from '@/components/CategoryPageComponent';
 import { ICategory, IProduct } from '@/type';
+import { notFound } from 'next/navigation';
 import React from 'react'
 
 const getCategoryData = async (catSlug: string): Promise<ICategory> => {
@@ -19,7 +20,11 @@ const CategoryPage = async ({params}: {params: Promise<{catSlug: string}>}) => {
 
     const {catSlug} = await params;
     const catData = await getCategoryData(catSlug);
+    if(catData.error) {
+        notFound();
+    }
     const products = await getCategoryProducts(catSlug);
+
     
   return (
     <CategoryPageComponent catData={catData} products={products}/>

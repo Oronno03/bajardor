@@ -1,4 +1,5 @@
 export interface ICategory {
+  error: string,
   id: string;
   slug: string;
   nameBn: string;
@@ -6,6 +7,7 @@ export interface ICategory {
 }
 
 export interface IProduct {
+  error: string,
   id: number;
   slug: string;
   nameBn: string;

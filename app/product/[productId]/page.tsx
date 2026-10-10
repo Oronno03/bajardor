@@ -5,7 +5,7 @@ import { IProduct } from "@/type";
 import PriceCard from "@/components/Product/PriceCard";
 import { formatPrice, getUnit } from "@/lib/utils";
 
-async function getProduct(productId: string): Promise<IProduct | null> {
+async function getProduct(productId: string): Promise<IProduct> {
   const response = await fetch(
     `https://api.abcz.workers.dev/api/bazardor/products/${productId}`,
   );
@@ -41,33 +41,9 @@ export default async function ProductPage({
 }) {
   const { productId } = await params;
 
-  let product: IProduct | null;
+  const product = await getProduct(productId);
 
-  try {
-    product = await getProduct(productId);
-  } catch {
-    return (
-      <main className="min-h-screen bg-base-200 px-4 py-16">
-        <div className="mx-auto max-w-3xl rounded-2xl border border-red-200 bg-white p-8 text-center shadow-sm">
-          <div className="text-4xl">⚠️</div>
-          <h1 className="mt-4 text-xl font-bold text-gray-900">
-            পণ্যের তথ্য লোড করা যায়নি
-          </h1>
-          <p className="mt-2 text-sm text-gray-600">
-            ইন্টারনেট সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।
-          </p>
-          <Link
-            href="/"
-            className="mt-6 inline-flex rounded-xl bg-success px-5 py-3 text-sm font-semibold text-white transition"
-          >
-            হোমে ফিরে যান
-          </Link>
-        </div>
-      </main>
-    );
-  }
-
-  if (!product) {
+  if (product.error) {
     notFound();
   }
 
