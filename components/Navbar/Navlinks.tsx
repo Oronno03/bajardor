@@ -1,5 +1,5 @@
 import { ICategory } from '@/type';
-import Link from 'next/link';
+import NavLinksDisplay from './NavLinksDisplay';
 
 const fetchCategories = async (): Promise<ICategory[]> => {
   const res  = await fetch("https://api.abcz.workers.dev/api/bazardor/categories");
@@ -13,16 +13,8 @@ const Navlinks = async () => {
   
   
   return (
-    <div className='px-4 py-2 gap-5 flex flex-wrap'>
-      {
-        categories.map(cat => (
-          <Link href={`/category/${cat.id}`} key={cat.id}>
-            {cat.icon} {cat.nameBn}
-          </Link>
-        ))
-      }
-    </div>
+    <NavLinksDisplay categories={categories} />
   )
 }
 
-export default Navlinks
+export default Navlinks;

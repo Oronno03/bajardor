@@ -12,8 +12,14 @@ const Content = () => {
   const params = useSearchParams();
   const router = useRouter();
   useEffect(() => {
-    if (params.get("alert") === "auth_required") {
-      toast.info("পণ্য অথবা ক্যাটাগরি দেখতে সাইন আপ করুন");
+    if (params.get("alert") === "auth_required_product") {
+      toast.info("পণ্য দেখতে সাইন আপ অথবা সাইন ইন করুন");
+      router.replace("/sign-up", { scroll: false });
+    } else if (params.get("alert") === "auth_required_category") {
+      toast.info("ক্যাটাগরি দেখতে সাইন আপ অথবা সাইন ইন করুন");
+      router.replace("/sign-up", { scroll: false });
+    } else if (params.get("alert") === "auth_required_profile") {
+      toast.info("প্রোফাইল দেখতে সাইন আপ অথবা সাইন ইন করুন");
       router.replace("/sign-up", { scroll: false });
     }
   }, [params, router]);
