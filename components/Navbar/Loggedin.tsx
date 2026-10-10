@@ -13,18 +13,7 @@ import { MdLogout } from "react-icons/md";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "react-toastify";
 import Link from "next/link";
-
-
-const handleLogout = async () => {
-    await authClient.signOut({}, {
-        onRequest: () => {
-            toast.info("সাইন আউট হচ্ছে");
-        },
-        onSuccess: () => {
-            toast.success("সাইন আউট সফল হয়েছে")
-        }
-    })
-}
+import { useRouter } from "next/navigation";
 
 const Loggedin = ({
   session,
@@ -52,7 +41,25 @@ const Loggedin = ({
   };
 }) => {
   const { user } = session;
+  const router = useRouter();
+
   if (!user) return;
+  const handleLogout = async () => {
+    await authClient.signOut(
+      {
+        callbackURL: "/",
+      },
+      {
+        onRequest: () => {
+          toast.info("সাইন আউট হচ্ছে");
+        },
+        onSuccess: () => {
+          toast.success("সাইন আউট সফল হয়েছে");
+          router.push("/");
+        },
+      },
+    );
+  };
 
   return (
     <div className="flex gap-3 items-center">
@@ -71,15 +78,24 @@ const Loggedin = ({
       )}
       <h1 className="max-sm:hidden">স্বাগতম, {user.name}</h1>
       <DropdownMenu>
-        <DropdownMenuTrigger className={"cursor-pointer"}>▼</DropdownMenuTrigger>
+        <DropdownMenuTrigger className={"cursor-pointer"}>
+          ▼
+        </DropdownMenuTrigger>
         <DropdownMenuContent className={"bg-white"}>
           <DropdownMenuGroup>
             <DropdownMenuLabel>আমার একাউন্ট</DropdownMenuLabel>
             <DropdownMenuItem>
-                <Link href={"/profile"} className="flex gap-2"><CgProfile /> প্রোফাইল</Link>
+              <Link href={"/profile"} className="flex gap-2">
+                <CgProfile /> প্রোফাইল
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
-                <button onClick={handleLogout} className="flex gap-2 cursor-pointer"><MdLogout /> লগআউট</button>
+              <button
+                onClick={handleLogout}
+                className="flex gap-2 cursor-pointer"
+              >
+                <MdLogout /> লগআউট
+              </button>
             </DropdownMenuItem>
           </DropdownMenuGroup>
         </DropdownMenuContent>

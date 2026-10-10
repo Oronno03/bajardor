@@ -16,7 +16,7 @@ const Navlinks = async () => {
     <div className='px-4 py-2 gap-5 flex flex-wrap'>
       {
         categories.map(cat => (
-          <Link href={`/category/${cat.slug}`} key={cat.id}>
+          <Link href={`/category/${cat.id}`} key={cat.id}>
             {cat.icon} {cat.nameBn}
           </Link>
         ))
