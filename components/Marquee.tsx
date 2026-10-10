@@ -21,10 +21,10 @@ const Marquee = async () => {
             {product.categoryIcon} {product.nameBn}{" "}
             {toBanglaNumber(product.today)}/কেজি{" "}
             <span
-              className={`${product.change.dir === "up" ? "text-error" : "text-success"}`}
+              className={`${product.change.dir === "up" ? "text-error" : product.change.dir === "down" ? "text-success" : "text-base-content"}`}
             >
-              {product.change.dir === "up" ? "▲" : "▼"}{" "}
-              {toBanglaNumber(product.change.pct)}%
+              {product.change.dir === "up" ? "▲" : product.change.dir === "down" ? "▼" : "—"}{" "}
+              {toBanglaNumber(product.change.pct.toFixed(1))}%
             </span>
           </Link>
         ))}

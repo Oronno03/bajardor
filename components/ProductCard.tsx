@@ -20,10 +20,10 @@ const ProductCard = ({ product }: { product: IProduct }) => {
           <h1><span className="font-extrabold text-[20px]">{toBanglaNumber(product.today)}</span> টাকা</h1>
         </div>
         <p
-          className={`${product.change.dir === "up" ? "text-error" : "text-success"} bg-base-200 px-2 py-1 rounded-lg`}
+          className={`${product.change.dir === "up" ? "text-error" : product.change.dir === "down" ? "text-success" : "text-base-content"} bg-base-200 px-2 py-1 rounded-lg`}
         >
-          {product.change.dir === "up" ? "▲" : "▼"}{" "}
-          {toBanglaNumber(product.change.pct)} %
+          {product.change.dir === "up" ? "▲" : product.change.dir === "down" ? "▼" : "—"}{" "}
+          {toBanglaNumber(product.change.pct.toFixed(1))} %
         </p>
       </div>
     </Link>
