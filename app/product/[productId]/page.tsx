@@ -47,7 +47,7 @@ export default async function ProductPage({
     product = await getProduct(productId);
   } catch {
     return (
-      <main className="min-h-screen bg-base-300 px-4 py-16">
+      <main className="min-h-screen bg-base-200 px-4 py-16">
         <div className="mx-auto max-w-3xl rounded-2xl border border-red-200 bg-white p-8 text-center shadow-sm">
           <div className="text-4xl">⚠️</div>
           <h1 className="mt-4 text-xl font-bold text-gray-900">
@@ -95,7 +95,7 @@ export default async function ProductPage({
   const isUp = product.change.dir === "up";
 
   return (
-    <main className="min-h-screen bg-base-300 px-4 py-6 text-gray-900 sm:px-6 sm:py-10">
+    <main className="min-h-screen bg-base-200 px-4 py-6 text-gray-900 sm:px-6 sm:py-10">
       <div className="mx-auto max-w-6xl">
         <nav
           aria-label="Breadcrumb"
@@ -120,7 +120,7 @@ export default async function ProductPage({
         <section className="rounded-2xl border border-primary-2/10 bg-white/90 p-5 shadow-sm sm:p-7">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex min-w-0 items-start gap-4">
-              <div className="flex size-16 shrink-0 items-center justify-center rounded-2xl bg-base-300 text-3xl sm:size-20 sm:text-4xl">
+              <div className="flex size-16 shrink-0 items-center justify-center rounded-2xl bg-base-200 text-3xl sm:size-20 sm:text-4xl">
                 {product.image || product.categoryIcon || "🛒"}
               </div>
 
@@ -172,7 +172,7 @@ export default async function ProductPage({
               </div>
             </div>
 
-            <div className="w-full shrink-0 rounded-2xl bg-base-300 p-5 sm:w-44 sm:text-center">
+            <div className="w-full shrink-0 rounded-2xl bg-base-200 p-5 sm:w-44 sm:text-center">
               <p className="text-sm text-gray-500">আজকের দাম</p>
               <p className="mt-1 text-3xl font-bold text-gray-900">
                 {toBanglaNumber(product.today)}
@@ -228,7 +228,7 @@ export default async function ProductPage({
               <div className="overflow-x-auto">
                 <table className="w-full min-w-155 border-collapse text-left text-sm">
                   <thead>
-                    <tr className="bg-base-300 text-xs font-semibold text-gray-500">
+                    <tr className="bg-base-200 text-xs font-semibold text-gray-500">
                       <th scope="col" className="px-4 py-4">
                         বাজার
                       </th>
@@ -257,7 +257,7 @@ export default async function ProductPage({
                         <tr
                           key={`${market.market}-${market.division}-${index}`}
                           className={`border-t border-primary-2/10 transition hover:bg-emerald-50/70 ${
-                            index % 2 === 0 ? "bg-white" : "bg-base-300"
+                            index % 2 === 0 ? "bg-white" : "bg-base-200"
                           }`}
                         >
                           <td className="px-4 py-4 font-medium text-base-content">
@@ -301,7 +301,7 @@ export default async function ProductPage({
             ].map((item) => (
               <div
                 key={item.label}
-                className="rounded-xl border border-gray-100 bg-base-300 p-4"
+                className="rounded-xl border border-gray-100 bg-base-200 p-4"
               >
                 <p className="text-sm text-gray-500">{item.label}</p>
                 <p className="mt-2 text-xl font-bold text-gray-900">
