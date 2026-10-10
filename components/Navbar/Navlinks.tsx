@@ -1,7 +1,5 @@
 import { ICategory } from '@/type';
-import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react'
 
 const fetchCategories = async (): Promise<ICategory[]> => {
   const res  = await fetch("https://api.abcz.workers.dev/api/bazardor/categories");
@@ -18,7 +16,7 @@ const Navlinks = async () => {
     <div className='px-4 py-2 gap-5 flex'>
       {
         categories.map(cat => (
-          <Link href={`/category/${cat.id}`} key={cat.id}>
+          <Link href={`/category/${cat.slug}`} key={cat.id}>
             {cat.icon} {cat.nameBn}
           </Link>
         ))
