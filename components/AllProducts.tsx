@@ -14,7 +14,7 @@ const AllProducts = async () => {
     const products = await fetchProducts();
     
   return (
-    <div className='container mx-auto mb-10' id='#সব-পণ্য'>
+    <div className='container mx-auto mb-10' id='সব-পণ্য'>
         <div className="flex flex-col gap-4">
             <h1 className='font-bold text-[20px]'>সব পণ্য</h1>
             <p className='text-[14px]'>মোট {toBanglaNumber(products.length)}টি পণ্য দেখানো হচ্ছে</p>
