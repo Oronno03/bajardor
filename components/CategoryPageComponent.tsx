@@ -52,7 +52,7 @@ const CategoryPageComponent = ({ catData, products }: Props) => {
 
       <div className="flex flex-col gap-3">
         <h1>মোট {products.length}টি পণ্য দেখানো হচ্ছে</h1>
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1  gap-4">
           {sortedProds.map((product) => (
             <ProductCard product={product} key={product.id} />
           ))}

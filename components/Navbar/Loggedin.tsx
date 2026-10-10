@@ -62,14 +62,14 @@ const Loggedin = ({
           height={40}
           width={40}
           alt="User PFP"
-          className="rounded-full"
+          className="rounded-full max-sm:hidden"
         />
       ) : (
-        <div className="bg-primary w-10 h-10 flex items-center justify-center text-white font-bold rounded-full">
+        <div className="max-sm:hidden bg-primary w-10 h-10 flex items-center justify-center text-white font-bold rounded-full">
           {user.name.charAt(0)}
         </div>
       )}
-      <h1>স্বাগতম, {user.name}</h1>
+      <h1 className="max-sm:hidden">স্বাগতম, {user.name}</h1>
       <DropdownMenu>
         <DropdownMenuTrigger className={"cursor-pointer"}>▼</DropdownMenuTrigger>
         <DropdownMenuContent className={"bg-white"}>

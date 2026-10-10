@@ -9,9 +9,9 @@ const date = new Date().toLocaleDateString("bn-BD", {
 const Hero = () => {
   return (
     <div className='container mx-auto my-10'>
-        <div className='flex bg-white justify-between items-center px-12 py-5 rounded-lg'>
-            <div className='max-w-[50%] flex flex-col gap-4'>
-                <div className='flex flex-col gap-2'>
+        <div className='flex flex-col sm:flex-row bg-white justify-center max-sm:text-center sm:justify-between items-center sm:px-12 py-5 rounded-lg'>
+            <div className='max-w-[50%] flex max-sm:items-center flex-col gap-4'>
+                <div className='flex flex-col gap-2 max-sm:items-center'>
                     <p className='text-primary text-[14px] bg-primary/10 w-max px-3 py-1 rounded-[14px]'>{date}</p>
                     <h1 className='font-bold text-[36px]'>আজকের বাজারের দাম এক নজরে</h1>
                 </div>

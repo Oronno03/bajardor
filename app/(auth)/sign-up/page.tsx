@@ -102,10 +102,10 @@ const SignUpPage = () => {
           বিনা খরচে সাইন আপ করে সব বিস্তারিত দাম দেখুন।
         </p>
       </div>
-      <div className="bg-white p-6 rounded-lg flex flex-col gap-4">
+      <div className="bg-white p-6 rounded-lg flex flex-col gap-4 max-w-screen">
         <form
           action="submit"
-          className="bg-white rounded-lg flex flex-col gap-4 min-w-100"
+          className="bg-white rounded-lg flex flex-col gap-4 sm:min-w-120"
           onSubmit={(e) => handleFormSubmit(e)}
         >
           <div className="flex flex-col gap-2">
@@ -162,11 +162,11 @@ const SignUpPage = () => {
           <p className="text-base-content text-[14px]">অথবা</p>
           <div className="h-0.5 bg-base-content/10 w-full"></div>
         </div>
-        <div className="flex justify-between items-center gap-2">
-          <button onClick={handleGoogleSignIn} className="cursor-pointer flex items-center px-4 py-2.5 gap-2.5 border border-solid border-base-300 rounded-lg font-bold text-[15px]">
+        <div className="flex max-md:flex-col justify-between items-center gap-2">
+          <button onClick={handleGoogleSignIn} className="w-full cursor-pointer flex justify-center items-center px-4 py-2.5 gap-2.5 border border-solid border-base-300 rounded-lg font-bold text-[15px]">
             <FcGoogle /> Google দিয়ে চালিয়ে যান
           </button>
-          <button onClick={handleGithubSignIn} className="cursor-pointer flex items-center px-4 py-2.5 gap-2.5 border border-solid border-base-300 rounded-lg font-bold text-[15px]">
+          <button onClick={handleGithubSignIn} className="w-full justify-center cursor-pointer flex items-center px-4 py-2.5 gap-2.5 border border-solid border-base-300 rounded-lg font-bold text-[15px]">
             <FaGithub /> Github দিয়ে চালিয়ে যান
           </button>
         </div>
