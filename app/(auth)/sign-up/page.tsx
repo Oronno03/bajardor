@@ -8,92 +8,6 @@ import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
 
-const handleFormSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
-  e.preventDefault();
-
-  const formData = new FormData(e.target);
-  const data = Object.fromEntries(formData.entries()) as {
-    name: string;
-    email: string;
-    password: string;
-    confirm: string;
-  };
-
-  if (!data.name || !data.email || !data.password || !data.confirm) {
-    toast.error("অনুগ্রহ পূর্বক পুরো ফর্মটি পূরণ করুন");
-    return;
-  }
-
-  if (data.password !== data.confirm) {
-    toast.error("আপনার পাসওয়ার্ড দুটি একই হতে হবে!");
-    return;
-  }
-
-  await authClient.signUp.email(
-    {
-      email: data.email,
-      name: data.name,
-      password: data.password,
-    },
-    {
-      onRequest: () => {
-        toast.info("একাউন্ট তৈরি হচ্ছে");
-      },
-      onSuccess: () => {
-        toast.success("একাউন্ট সফলভাবে তৈরি হয়েছে");
-        navigation.navigate("/");
-      },
-      onError: (ctx) => {
-        if (ctx.error.code === "USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL") {
-          toast.error("একাউন্ট ইতিমধ্যে রয়েছে। অনুগ্রহ পূর্বক সাইন ইন করুন!");
-        } else {
-          toast.error(ctx.error.message);
-        }
-      },
-    },
-  );
-};
-
-const handleGoogleSignIn = async () => {
-  await authClient.signIn.social(
-    {
-      provider: "google",
-      callbackURL: "/",
-    },
-    {
-      onRequest: () => {
-        toast.info("সাইন আপ হচ্ছে");
-      },
-      onSuccess: () => {
-        toast.success("আপনি সফলভাবে গুগল দিয়ে সাইন আপ করেছেন!");
-      },
-      onError: () => {
-        toast.error("সাইন আপ সফল হয়নি");
-      },
-    },
-  );
-};
-
-const handleGithubSignIn = async () => {
-  await authClient.signIn.social(
-    {
-      provider: "github",
-      callbackURL: "/",
-    },
-    {
-      onRequest: () => {
-        toast.info("সাইন আপ হচ্ছে");
-      },
-      onSuccess: () => {
-        toast.success("আপনি সফলভাবে গিটহাব দিয়ে সাইন আপ করেছেন!");
-      },
-      onError: () => {
-        toast.error("সাইন আপ সফল হয়নি");
-      },
-    },
-  );
-};
-
 const Content = () => {
   const params = useSearchParams();
   const router = useRouter();
@@ -103,6 +17,92 @@ const Content = () => {
       router.replace("/sign-up", { scroll: false });
     }
   }, [params, router]);
+
+  const handleFormSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries()) as {
+      name: string;
+      email: string;
+      password: string;
+      confirm: string;
+    };
+
+    if (!data.name || !data.email || !data.password || !data.confirm) {
+      toast.error("অনুগ্রহ পূর্বক পুরো ফর্মটি পূরণ করুন");
+      return;
+    }
+
+    if (data.password !== data.confirm) {
+      toast.error("আপনার পাসওয়ার্ড দুটি একই হতে হবে!");
+      return;
+    }
+
+    await authClient.signUp.email(
+      {
+        email: data.email,
+        name: data.name,
+        password: data.password,
+      },
+      {
+        onRequest: () => {
+          toast.info("একাউন্ট তৈরি হচ্ছে");
+        },
+        onSuccess: () => {
+          toast.success("একাউন্ট সফলভাবে তৈরি হয়েছে");
+          router.push("/");
+        },
+        onError: (ctx) => {
+          if (ctx.error.code === "USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL") {
+            toast.error("একাউন্ট ইতিমধ্যে রয়েছে। অনুগ্রহ পূর্বক সাইন ইন করুন!");
+          } else {
+            toast.error(ctx.error.message);
+          }
+        },
+      },
+    );
+  };
+
+  const handleGoogleSignIn = async () => {
+    await authClient.signIn.social(
+      {
+        provider: "google",
+        callbackURL: "/",
+      },
+      {
+        onRequest: () => {
+          toast.info("সাইন আপ হচ্ছে");
+        },
+        onSuccess: () => {
+          toast.success("আপনি সফলভাবে গুগল দিয়ে সাইন আপ করেছেন!");
+        },
+        onError: () => {
+          toast.error("সাইন আপ সফল হয়নি");
+        },
+      },
+    );
+  };
+
+  const handleGithubSignIn = async () => {
+    await authClient.signIn.social(
+      {
+        provider: "github",
+        callbackURL: "/",
+      },
+      {
+        onRequest: () => {
+          toast.info("সাইন আপ হচ্ছে");
+        },
+        onSuccess: () => {
+          toast.success("আপনি সফলভাবে গিটহাব দিয়ে সাইন আপ করেছেন!");
+        },
+        onError: () => {
+          toast.error("সাইন আপ সফল হয়নি");
+        },
+      },
+    );
+  };
 
   return (
     <div className="w-full my-10 flex flex-col items-center justify-center gap-7">
