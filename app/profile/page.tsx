@@ -58,6 +58,7 @@ const ProfilePage = () => {
                 height={60}
                 width={60}
                 alt="User PFP"
+                className="rounded-full"
               />
             ) : (
               <div className="bg-primary w-15 h-15 text-[30px] flex items-center justify-center text-white font-bold rounded-full">

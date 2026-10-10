@@ -62,6 +62,7 @@ const Loggedin = ({
           height={40}
           width={40}
           alt="User PFP"
+          className="rounded-full"
         />
       ) : (
         <div className="bg-primary w-10 h-10 flex items-center justify-center text-white font-bold rounded-full">

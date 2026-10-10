@@ -21,7 +21,6 @@ const handleFormSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     return;
   }
 
-
   await authClient.signIn.email(
     {
       email: data.email,
@@ -41,6 +40,46 @@ const handleFormSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
         } else {
           toast.error(ctx.error.message);
         }
+      },
+    },
+  );
+};
+
+const handleGoogleSignIn = async () => {
+  await authClient.signIn.social(
+    {
+      provider: "google",
+      callbackURL: "/",
+    },
+    {
+      onRequest: () => {
+        toast.info("সাইন ইন হচ্ছে");
+      },
+      onSuccess: () => {
+        toast.success("আপনি সফলভাবে গুগল দিয়ে সাইন ইন করেছেন!");
+      },
+      onError: () => {
+        toast.error("সাইন ইন সফল হয়নি");
+      },
+    },
+  );
+};
+
+const handleGithubSignIn = async () => {
+  await authClient.signIn.social(
+    {
+      provider: "github",
+      callbackURL: "/",
+    },
+    {
+      onRequest: () => {
+        toast.info("সাইন ইন হচ্ছে");
+      },
+      onSuccess: () => {
+        toast.success("আপনি সফলভাবে গিটহাব দিয়ে সাইন ইন করেছেন!");
+      },
+      onError: () => {
+        toast.error("সাইন ইন সফল হয়নি");
       },
     },
   );
@@ -95,15 +134,18 @@ const SignInPage = () => {
           <div className="h-0.5 bg-base-content/10 w-full"></div>
         </div>
         <div className="flex justify-between items-center gap-2">
-          <p className="flex items-center px-4 py-2.5 gap-2.5 border border-solid border-base-300 rounded-lg font-bold text-[15px]">
+          <button onClick={handleGoogleSignIn} className="cursor-pointer flex items-center px-4 py-2.5 gap-2.5 border border-solid border-base-300 rounded-lg font-bold text-[15px]">
             <FcGoogle /> Google দিয়ে চালিয়ে যান
-          </p>
-          <p className="flex items-center px-4 py-2.5 gap-2.5 border border-solid border-base-300 rounded-lg font-bold text-[15px]">
+          </button>
+          <button onClick={handleGithubSignIn} className="cursor-pointer flex items-center px-4 py-2.5 gap-2.5 border border-solid border-base-300 rounded-lg font-bold text-[15px]">
             <FaGithub /> Github দিয়ে চালিয়ে যান
-          </p>
+          </button>
         </div>
         <p className="text-center text-[14px]">
-          অ্যাকাউন্ট নেই? <Link href={"/sign-up"} className="text-primary">সাইন আপ করুন</Link>
+          অ্যাকাউন্ট নেই?{" "}
+          <Link href={"/sign-up"} className="text-primary">
+            সাইন আপ করুন
+          </Link>
         </p>
       </div>
       <Link href={"/"}>← হোম পেজে ফিরে যান</Link>

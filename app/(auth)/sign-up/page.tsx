@@ -53,6 +53,46 @@ const handleFormSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
   );
 };
 
+const handleGoogleSignIn = async () => {
+  await authClient.signIn.social(
+    {
+      provider: "google",
+      callbackURL: "/",
+    },
+    {
+      onRequest: () => {
+        toast.info("সাইন আপ হচ্ছে");
+      },
+      onSuccess: () => {
+        toast.success("আপনি সফলভাবে গুগল দিয়ে সাইন আপ করেছেন!");
+      },
+      onError: () => {
+        toast.error("সাইন আপ সফল হয়নি");
+      },
+    },
+  );
+};
+
+const handleGithubSignIn = async () => {
+  await authClient.signIn.social(
+    {
+      provider: "github",
+      callbackURL: "/",
+    },
+    {
+      onRequest: () => {
+        toast.info("সাইন আপ হচ্ছে");
+      },
+      onSuccess: () => {
+        toast.success("আপনি সফলভাবে গিটহাব দিয়ে সাইন আপ করেছেন!");
+      },
+      onError: () => {
+        toast.error("সাইন আপ সফল হয়নি");
+      },
+    },
+  );
+};
+
 const SignUpPage = () => {
   return (
     <div className="w-full my-10 flex flex-col items-center justify-center gap-7">
@@ -123,12 +163,12 @@ const SignUpPage = () => {
           <div className="h-0.5 bg-base-content/10 w-full"></div>
         </div>
         <div className="flex justify-between items-center gap-2">
-          <p className="flex items-center px-4 py-2.5 gap-2.5 border border-solid border-base-300 rounded-lg font-bold text-[15px]">
+          <button onClick={handleGoogleSignIn} className="cursor-pointer flex items-center px-4 py-2.5 gap-2.5 border border-solid border-base-300 rounded-lg font-bold text-[15px]">
             <FcGoogle /> Google দিয়ে চালিয়ে যান
-          </p>
-          <p className="flex items-center px-4 py-2.5 gap-2.5 border border-solid border-base-300 rounded-lg font-bold text-[15px]">
+          </button>
+          <button onClick={handleGithubSignIn} className="cursor-pointer flex items-center px-4 py-2.5 gap-2.5 border border-solid border-base-300 rounded-lg font-bold text-[15px]">
             <FaGithub /> Github দিয়ে চালিয়ে যান
-          </p>
+          </button>
         </div>
         <p className="text-center text-[14px]">
           অ্যাকাউন্ট আছে?{" "}
