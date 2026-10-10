@@ -1,6 +1,7 @@
 import Navtop from "./Navtop";
 import Navlinks from "./Navlinks";
 import { Suspense } from "react";
+import NavLinksSkeleton from "./NavlinksSkeleton";
 
 const Navbar = () => {
   return (
@@ -11,7 +12,7 @@ const Navbar = () => {
         </div>
         <div className="w-full h-px bg-primary/10"></div>
         <div className="mx-auto container">
-          <Suspense fallback={"Loading navlinks..."}>
+          <Suspense fallback={<NavLinksSkeleton />}>
             <Navlinks />
           </Suspense>
         </div>

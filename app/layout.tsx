@@ -6,6 +6,7 @@ import { Suspense } from "react";
 import Marquee from "@/components/Marquee";
 import { ToastContainer } from "react-toastify";
 import { cn } from "@/lib/utils";
+import MarqueeSkeleton from "@/components/MarqueeSkeleton";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -29,7 +30,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           position="bottom-right"
         />
         <Navbar />
-        <Suspense fallback={"Loading..."}>
+        <Suspense fallback={<MarqueeSkeleton />}>
           <Marquee />
         </Suspense>
         {children}

@@ -7,7 +7,7 @@ const Navauth = () => {
 
   const {data: session, isPending} = authClient.useSession();
 
-  if(isPending) return;
+  if(isPending) return "Loading Session";
 
   return (
     <div>
