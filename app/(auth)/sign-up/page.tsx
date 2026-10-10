@@ -2,7 +2,8 @@
 
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
-import React from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import React, { Suspense, useEffect } from "react";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
@@ -93,7 +94,16 @@ const handleGithubSignIn = async () => {
   );
 };
 
-const SignUpPage = () => {
+const Content = () => {
+  const params = useSearchParams();
+  const router = useRouter();
+  useEffect(() => {
+    if (params.get("alert") === "auth_required") {
+      toast.info("পণ্য অথবা ক্যাটাগরি দেখতে সাইন আপ করুন");
+      router.replace("/sign-up", { scroll: false });
+    }
+  }, [params, router]);
+
   return (
     <div className="w-full my-10 flex flex-col items-center justify-center gap-7">
       <div className="text-center">
@@ -163,10 +173,16 @@ const SignUpPage = () => {
           <div className="h-0.5 bg-base-content/10 w-full"></div>
         </div>
         <div className="flex max-md:flex-col justify-between items-center gap-2">
-          <button onClick={handleGoogleSignIn} className="w-full cursor-pointer flex justify-center items-center px-4 py-2.5 gap-2.5 border border-solid border-base-300 rounded-lg font-bold text-[15px]">
+          <button
+            onClick={handleGoogleSignIn}
+            className="w-full cursor-pointer flex justify-center items-center px-4 py-2.5 gap-2.5 border border-solid border-base-300 rounded-lg font-bold text-[15px]"
+          >
             <FcGoogle /> Google দিয়ে চালিয়ে যান
           </button>
-          <button onClick={handleGithubSignIn} className="w-full justify-center cursor-pointer flex items-center px-4 py-2.5 gap-2.5 border border-solid border-base-300 rounded-lg font-bold text-[15px]">
+          <button
+            onClick={handleGithubSignIn}
+            className="w-full justify-center cursor-pointer flex items-center px-4 py-2.5 gap-2.5 border border-solid border-base-300 rounded-lg font-bold text-[15px]"
+          >
             <FaGithub /> Github দিয়ে চালিয়ে যান
           </button>
         </div>
@@ -179,6 +195,14 @@ const SignUpPage = () => {
       </div>
       <Link href={"/"}>← হোম পেজে ফিরে যান</Link>
     </div>
+  );
+};
+
+const SignUpPage = () => {
+  return (
+    <Suspense fallback={"লোড হচ্ছে..."}>
+      <Content />
+    </Suspense>
   );
 };
 
