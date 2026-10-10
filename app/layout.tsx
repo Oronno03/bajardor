@@ -7,6 +7,7 @@ import Marquee from "@/components/Marquee";
 import { ToastContainer } from "react-toastify";
 import { cn } from "@/lib/utils";
 import MarqueeSkeleton from "@/components/MarqueeSkeleton";
+import Footer from "@/components/Footer";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -19,12 +20,15 @@ const hindSiliguri = Hind_Siliguri({
 export const metadata: Metadata = {
   title: "Bajarerdor",
   description: "",
+  icons: {
+    icon: "/logo-icon.png"
+  }
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={cn("h-full", "antialiase", hindSiliguri.variable, "font-sans", geist.variable)}>
-      <body className="min-h-full flex flex-col bg-base-200">
+      <body className="min-h-screen flex flex-col bg-base-200">
         <ToastContainer
           draggable={true}
           position="bottom-right"
@@ -34,6 +38,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Marquee />
         </Suspense>
         {children}
+        <div className="mt-auto w-full">
+          <Footer />
+        </div>
       </body>
     </html>
   );
